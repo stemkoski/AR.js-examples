@@ -1,0 +1,77 @@
+<!doctype HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
+<body style="margin: 0px; overflow: hidden;">
+
+<script>
+
+// attach this component to the up
+AFRAME.registerComponent('canvas-texture', {
+
+	init: function()
+	{
+		this.canvas = document.querySelector("#myCanvas");
+
+		this.canvas.width = 512;
+		this.canvas.height = 512;
+		this.context = this.canvas.getContext('2d');
+		
+		this.x = 200;
+		this.y = 100;
+		this.dx = 5;
+		this.dy = 3;
+	},
+	
+	tick: function(t, dt)
+	{
+		this.x += this.dx;
+		this.y += this.dy;
+		
+		let w = 50;
+		let h = 50;
+
+		if (this.x > 512-w || this.x < 0)
+			this.dx *= -1;
+		if (this.y > 512-h || this.y < 0)
+			this.dy *= -1;
+	
+		// clear canvas
+		this.context.fillStyle = "#8888FF";
+		this.context.fillRect(0,0, 512,512);
+		
+		// draw rectangle
+		this.context.fillStyle = "#FF0000";
+		this.context.fillRect( this.x, this.y, w, h );
+
+		// signal that image data needs to be updated
+		let material = this.el.getObject3D("mesh").material;
+		if (!material.map)
+			return;
+		else
+			material.map.needsUpdate = true;
+	}
+});
+</script>
+
+
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;">
+
+    <a-assets>
+        <canvas id="myCanvas"></canvas>
+	</a-assets>
+    
+    <a-marker type="pattern" url="data/kanji.patt">
+        <a-box
+               position="0 0.5 0" 
+               material="src: #myCanvas; transparent: true; opacity: 0.95;"
+               canvas-texture>
+        </a-box>
+    </a-marker>
+    
+    <a-entity camera></a-entity>
+    
+</a-scene>
+</body>
+</html>

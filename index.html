@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AR.js examples</title>
+	<link rel=stylesheet href="index/index.css"/>
+</head>
+<body>
+
+<div class="bigTitle">AR.js examples</div>
+<hr>
+
+The goal of this collection is to provide a set of basic and instructive examples that introduce the various features in the Javascript-based Augmented Reality (AR) library, 
+<a href="https://github.com/jeromeetienne/AR.js">AR.js</a> (version 2), built upon the <a href="https://aframe.io/">A-Frame</a> and <a href="https://threejs.org/">three.js</a> libraries.
+
+<br/><br/>
+Viewing the AR examples will require a device with a camera and various marker images to be detected, which are available in the <code>markers</code> directory in this repository. Requires the kanji marker unless otherwise specified.
+
+<br/><br/>
+Source code hosted at <a class="toc" href="https://github.com/stemkoski/AR.js-examples">github.com/stemkoski/AR.js-examples</a>.
+
+<hr/>
+
+<table class="fancy"><tr>
+	<td><a href="basic.html"><img src="index/basic.png" class="superImage" /></a></td>
+	<td class="tableText"><a href="basic.html">Hello, AR World!</a>
+	<p>A basic scene that places plain and textured shapes on markers (kanji, barcodes 0/1/2).</p></td>
+</tr></table>
+
+<table class="fancy"><tr>
+	<td><a href="models.html"><img src="index/model.png" class="superImage" /></a></td>
+	<td class="tableText"><a href="models.html">3D model</a>
+	<p>A single gltf model attached to a marker.</p></td>
+</tr></table>
+
+<table class="fancy"><tr>
+	<td><a href="cubemap.html"><img src="index/cubemap.png" class="superImage" /></a></td>
+	<td class="tableText"><a href="cubemap.html">Multi-Textured Cube</a>
+	<p>A cube with different images on each side, attached to a marker. <br/>Uses the aframe-multisrc component.</p></td>
+</tr></table>
+
+<table class="fancy"><tr>
+	<td><a href="animation.html"><img src="index/animation.png" class="superImage" /></a></td>
+	<td class="tableText"><a href="animation.html">Animation</a>
+	<p>Animating (rotating) a globe attached to a marker, using the built-in animation component.</p></td>
+</tr></table>
+
+<table class="fancy"><tr>
+	<td><a href="text.html"><img src="index/text.png" class="superImage" /></a></td>
+	<td class="tableText"><a href="text.html">Text (2D and 3D)</a>
+	<p>Attaching text to the kanji and hiro markers.<br/>
+	3D text uses the aframe-text-geometry component.</p></td>
+</tr></table>
+
+<table class="fancy"><tr>
+	<td><a href="particles.html"><img src="index/particles.png" class="superImage" /></a></td>
+	<td class="tableText"><a href="particles.html">Particle Effects</a>
+	<p>Creating a particle system effect, attached to a marker. 
+		<br/>Uses the aframe-particle system component.</p></td>
+</tr></table>
+
+<table class="fancy"><tr>
+	<td><a href="scripting.html"><img src="index/scripting.png" class="superImage" /></a></td>
+	<td class="tableText"><a href="scripting.html">Introduction to Scripting</a>
+	<p>Rotates a globe attached to a marker, by writing an A-Frame component and modifying the underlying Three.js object.</p></td>
+</tr></table>
+
+<table class="fancy"><tr>
+	<td><a href="canvas.html"><img src="index/canvas.png" class="superImage" /></a></td>
+	<td class="tableText"><a href="canvas.html">Canvas Textures</a>
+	<p>Using an HTML canvas as the texture for a cube; creating an animation ("bouncing block") on the canvas and updating the cube texture. </p></td>
+</tr></table>
+
+<table class="fancy"><tr>
+	<td><a href="detection.html"><img src="index/detection.png" class="superImage" /></a></td>
+	<td class="tableText"><a href="detection.html">Detection</a>
+	<p>A cube is attached to a kanji marker. Red, yellow, and blue squares are attached to barcode markers 0, 1, and 2. 
+	The color of the cube changes depending on which combination of the markers is visible.</p></td>
+</tr></table>
+
+<table class="fancy"><tr>
+	<td><a href="follower.html"><img src="index/follower.png" class="superImage" /></a></td>
+	<td class="tableText"><a href="follower.html">Persistence and Following </a>
+	<p>A green square is attached to a marker. If the marker is no longer visible, the square turns red and remains in the last known
+	position of the marker. If the marker then becomes visible again, the square turns green and moves (lerps) to the new position.</p></td>
+</tr></table>
+
+<table class="fancy"><tr>
+	<td><a href="line.html"><img src="index/line.png" class="superImage" /></a></td>
+	<td class="tableText"><a href="line.html">Line between two markers</a>
+	<p>Drawing a line between the centers of barcode markers 0 and 1. (Updates line geometry vertices.)</p></td>
+</tr></table>
+
+<table class="fancy"><tr>
+	<td><a href="line2.html"><img src="index/cylinder.png" class="superImage" /></a></td>
+	<td class="tableText"><a href="line2.html">Cylinder between two markers</a>
+	<p>Since lines can be difficult to see, drawing spheres at the centers of barcode markers 0 and 1, and creating a cylinder between the them. (Reorients and rescales the cylinder depending on the distance between the markers.)</p></td>
+</tr></table>
+
+<!--
+<table class="fancy"><tr>
+	<td><img src="index/IMAGE-NAME.png" class="superImage" /></td>
+	<td class="tableText"><a href="FILE.html">TITLE</a>
+	<p>DESCRIPTION</p></td>
+</tr></table>
+-->
+
+</body>
+</html>

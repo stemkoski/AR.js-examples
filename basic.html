@@ -1,0 +1,47 @@
+<!doctype HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
+<body style="margin: 0px; overflow: hidden;">
+  
+<!-- set detectionMode and matrixCodeType to enable barcode marker detection and custom pattern files -->
+
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+
+    <a-assets>
+		<img id="grid" src="images/border.png" />
+		<img id="earth-flat" src="images/earth-flat.jpg" />
+		<img id="earth-sphere" src="images/earth-sphere.jpg" />
+	</a-assets>
+    
+    <a-marker type="pattern" url="data/kanji.patt">
+        <a-box position="0 0.5 0" 
+               material="color: red; transparent: true; opacity: 0.50;">
+        </a-box>
+    </a-marker>
+    
+    <a-marker type="barcode" value="0">
+        <a-box position="0 0.5 0" 
+               material="src: #grid; color: yellow; transparent: true; opacity: 0.50;">
+        </a-box>
+    </a-marker>
+
+    <a-marker type="barcode" value="1">
+        <a-plane position="0 0 0" 
+                 rotation="-90 0 0"
+               material="src: #earth-flat;">
+        </a-plane>
+    </a-marker>
+
+    <a-marker type="barcode" value="2">
+        <a-sphere position="0 0.5 0" 
+               material="src: #earth-sphere; transparent: true; opacity: 0.95;">
+        </a-sphere>
+    </a-marker>
+    
+    <a-entity camera></a-entity>
+    
+</a-scene>
+</body>
+</html>

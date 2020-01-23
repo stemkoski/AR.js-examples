@@ -1,0 +1,102 @@
+<!doctype HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
+<body style="margin: 0px; overflow: hidden;">
+
+<script>
+
+let markerVisible = { "redMarker": false, "yellowMarker": false, "blueMarker": false };
+
+AFRAME.registerComponent('registerevents', {
+    init: function () 
+    {
+        let marker = this.el;
+
+        marker.addEventListener('markerFound', function() {
+            markerVisible[ marker.id ] = true;
+            // console.log( markerVisible );
+        });
+
+        marker.addEventListener('markerLost', function() {
+            markerVisible[ marker.id ] = false;
+            // console.log( markerVisible );
+        });
+    }
+});
+
+AFRAME.registerComponent('loop', 
+{   
+    init: function()
+    {
+        this.box = document.querySelector("#theBox");
+    },
+    
+    tick: function (time, deltaTime) 
+    {
+        // for convenience
+        let mv = markerVisible, r = "redMarker", y = "yellowMarker", b = "blueMarker";
+        
+        if ( mv[r] && mv[y] && mv[b] )
+            this.box.setAttribute("color", "#654321");
+        else if ( mv[r] && mv[y] && !mv[b] )
+            this.box.setAttribute("color", "#FF8800");
+        else if ( mv[r] && !mv[y] && mv[b] )
+            this.box.setAttribute("color", "purple");
+        else if ( mv[r] && !mv[y] && !mv[b] )
+            this.box.setAttribute("color", "red");
+        else if ( !mv[r] && mv[y] && mv[b] )
+            this.box.setAttribute("color", "green");
+        else if ( !mv[r] && mv[y] && !mv[b] )
+            this.box.setAttribute("color", "yellow");
+        else if ( !mv[r] && !mv[y] && mv[b] )
+            this.box.setAttribute("color", "blue");
+        else // if ( !mv[r] && !mv[y] && !mv[b] )
+            this.box.setAttribute("color", "gray");
+    }
+});
+
+</script>
+
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+
+    <a-assets>
+		<img id="grid" src="images/border.png" />
+	</a-assets>
+    
+    <a-marker type="pattern" url="data/kanji.patt" id="baseMarker">
+        <a-box id="theBox"
+               position="0 0.5 0"
+               color = "white"
+               material="src:#grid; transparent: true; opacity: 0.90;">
+        </a-box>
+    </a-marker>
+    
+    <a-marker type="barcode" value="0" id="redMarker" registerevents>
+        <a-plane position="0 0 0" 
+                 rotation="-90 0 0"
+               material="color: red">
+        </a-plane>
+    </a-marker>
+
+    <a-marker type="barcode" value="1" id="yellowMarker" registerevents>
+        <a-plane position="0 0 0" 
+                 rotation="-90 0 0"
+               material="color: yellow">
+        </a-plane>
+    </a-marker>
+
+    <a-marker type="barcode" value="2" id="blueMarker" registerevents>
+        <a-plane position="0 0 0" 
+                 rotation="-90 0 0"
+               material="color: blue">
+        </a-plane>
+    </a-marker>
+    
+    <a-entity camera></a-entity>
+    <a-entity loop></a-entity>
+    
+</a-scene>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
+<script src="js/aframe-particle-system-component.js"></script>
+<body style="margin: 0px; overflow: hidden;">
+
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;">
+
+    <!-- 
+    for more info, see: https://aframe.io/docs/1.0.0/components/animation.html 
+    for more examples:  https://stemkoski.github.io/A-Frame-Examples/animation.html
+    -->
+    
+    <a-marker type="pattern" url="data/kanji.patt">
+        <a-entity 
+            position="0 0 0" 
+            particle-system="
+                texture: images/particles/star.png;
+                color: #FF0000, #FFFF00; 
+                size: 1, 0;
+                velocityValue: 0.001 0.001 0.001;
+                velocitySpread: 0.5 0 0.5; 
+                accelerationValue: 0.001 0.001 0.001;
+                accelerationSpread: 0.001 0.001 0.001;
+                rotationAngle: 0; 
+                blending: 1;
+                particleCount: 200;
+                maxAge: 5; ">
+        </a-entity>
+    </a-marker>
+    
+    <a-entity camera></a-entity>
+    
+</a-scene>
+</body>
+</html>

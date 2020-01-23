@@ -1,0 +1,37 @@
+<!doctype HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
+<script src="js/aframe-multisrc-component.js"></script>
+<body style="margin: 0px; overflow: hidden;">
+
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;">
+
+    <a-assets>
+		<img id="earth-sphere" src="images/earth-sphere.jpg" />
+        <img id="xpos" src="images/box-sides/xpos.png">
+        <img id="xneg" src="images/box-sides/xneg.png">
+        <img id="ypos" src="images/box-sides/ypos.png">
+        <img id="yneg" src="images/box-sides/yneg.png">
+        <img id="zpos" src="images/box-sides/zpos.png">
+        <img id="zneg" src="images/box-sides/zneg.png">
+	</a-assets>
+
+    <!-- 
+    for more info, see: https://aframe.io/docs/1.0.0/components/animation.html 
+    for more examples:  https://stemkoski.github.io/A-Frame-Examples/animation.html
+    -->
+    
+    <a-marker type="pattern" url="data/kanji.patt">
+        <a-box position="0 0.5 0"
+               multisrc="srcs:#xpos,#xneg,#ypos,#yneg,#zpos,#zneg"
+               material="transparent: true; opacity: 0.95; side: double;">
+        </a-box>
+    </a-marker>
+    
+    <a-entity camera></a-entity>
+    
+</a-scene>
+</body>
+</html>

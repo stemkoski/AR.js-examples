@@ -1,0 +1,26 @@
+<!doctype HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
+<body style="margin: 0px; overflow: hidden;">
+
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;">
+
+    <a-assets>
+        <canvas id="myCanvas"></canvas>
+	</a-assets>
+    
+    <a-marker type="pattern" url="data/kanji.patt">
+        <a-box
+               position="0 0.5 0" 
+               material="color: red; transparent: true; opacity: 0.95;"
+               >
+        </a-box>
+    </a-marker>
+    
+    <a-entity camera></a-entity>
+    
+</a-scene>
+</body>
+</html>
