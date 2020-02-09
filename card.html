@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
+<body style="margin: 0px; overflow: hidden;">
+
+<script>
+
+let markerVisible = false;
+
+AFRAME.registerComponent('registerevents', {
+    init: function () 
+    {
+        let marker = this.el;
+        let follower = document.querySelector("#follower");
+        let followerPlane = document.querySelector("#followerPlane");
+        
+        marker.addEventListener('markerFound', function() {
+            // check if marker is found for the first time;
+            //  if so, make object visible and align position/rotation.
+            if ( follower.getAttribute("active") == "0" )
+            {
+                follower.setAttribute("active", "1");
+                followerPlane.setAttribute("material", "visible", "true");   
+            }
+            markerVisible = true;
+        });
+
+        marker.addEventListener('markerLost', function() {
+            markerVisible = false;
+        });
+        
+        this.p = new THREE.Vector3();
+        this.q = new THREE.Quaternion();
+        this.s = new THREE.Vector3();   
+    },
+    
+    tick: function (time, deltaTime) 
+    {
+        // if marker is visible, align the entity to the marker
+        if (markerVisible)
+        {
+            let marker = this.el;
+            let follower = document.querySelector("#follower");
+            let followerPlane = document.querySelector("#followerPlane");
+
+            let lerpAmount = 0.5;
+
+            marker.object3D.getWorldPosition(this.p);
+			marker.object3D.getWorldQuaternion(this.q);
+			marker.object3D.getWorldScale(this.s);
+
+			follower.object3D.position.lerp(this.p, lerpAmount);
+            follower.object3D.quaternion.slerp(this.q, lerpAmount);
+			follower.object3D.scale.lerp(this.s, lerpAmount);
+            
+            followerPlane.setAttribute("color", "green");
+        } 
+        else
+        {
+            followerPlane.setAttribute("color", "red");            
+        }
+    }
+});
+
+</script>
+
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+
+    <a-assets>
+		<img id="grid" src="images/border.png" />
+	</a-assets>
+
+    <a-marker type="pattern" url="data/LS.patt" id="baseMarker" registerevents>
+    </a-marker>
+    
+    <!-- 
+        this entity will move (lerp) towards the marker when visible;
+        turns green when marker visible, red when marker not visible
+    -->
+    <a-entity id="follower" active="0">
+        <a-plane id="followerPlane"
+               position="0 0 0"
+               rotation="-90 0 0"
+               color = "green"
+               material="src:#grid; transparent: true; opacity: 0.90; side:double; visible:false;">
+        </a-plane>
+    </a-entity>
+        
+    
+    <a-entity camera></a-entity>
+    
+</a-scene>
+</body>
+</html>
